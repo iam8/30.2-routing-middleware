@@ -40,8 +40,13 @@ router.get("/:name", (req, res, next) => {
 
 /** DELETE /items/:name: delete a specific item from the shopping list. */
 router.delete("/:name", (req, res, next) => {
-    const name = req.params.name;
+    const idx = items.findIndex((item) => {item.name === req.params.name});
 
+    if (idx < 0) {
+        return res.json({ message: "No item with the given name exists in list."});
+    }
+
+    items.splice(idx, 1);
     return res.json({ message: "Deleted"});
 })
 
