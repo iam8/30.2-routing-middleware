@@ -9,6 +9,7 @@ const app = express();
 const { router } = require("./routes");
 
 
+app.use(express.json());
 app.use("/items", router);
 
 
