@@ -9,6 +9,27 @@ const app = express();
 const { router } = require("./routes");
 
 
+// ERROR HANDLERS ---------------------------------------------------------------------------------
+
+// Handler for 404 errors
+app.use((req, res, next) => {
+    const notFoundError = new ExpressError("Page not found!", 404);
+    return next(notFoundError);
+})
+
+// Global error handler
+app.use((err, req, res, next) => {
+    const status = err.status || 500;
+    const message = err.message;
+
+    // Set status and alert the user
+    return res.status(status).json({
+        error: {message, status}
+    })
+})
+
+// ------------------------------------------------------------------------------------------------
+
 app.use(express.json());
 app.use("/items", router);
 
