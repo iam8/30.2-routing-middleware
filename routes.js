@@ -6,11 +6,11 @@
 const express = require("express");
 const router = new express.Router();
 
-const items = require("./fakeDb");
+const { items } = require("./fakeDb");
 
 
 /** GET /items: get list of items on shopping list. */
-router.get("/items", (req, res, next) => {
+router.get("/", (req, res, next) => {
     return res.json(items);
 })
 
