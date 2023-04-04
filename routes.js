@@ -42,7 +42,14 @@ router.get("/:name", (req, res, next) => {
  */
 router.patch("/:name", (req, res, next) => {
 
+    for (let item of items) {
+        if (item.name === req.params.name) {
 
+            for (let attr in req.body) {
+                item[`${attr}`] = req.body[`${attr}`];
+            }
+        }
+    }
 })
 
 
