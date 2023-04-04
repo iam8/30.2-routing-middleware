@@ -7,7 +7,11 @@ const express = require("express");
 const app = express();
 
 const { router } = require("./routes");
+const { ExpressError } = require("./expressError");
 
+
+app.use(express.json());
+app.use("/items", router);
 
 // ERROR HANDLERS ---------------------------------------------------------------------------------
 
@@ -29,9 +33,6 @@ app.use((err, req, res, next) => {
 })
 
 // ------------------------------------------------------------------------------------------------
-
-app.use(express.json());
-app.use("/items", router);
 
 
 module.exports = {
