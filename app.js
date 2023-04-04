@@ -6,10 +6,10 @@
 const express = require("express");
 const app = express();
 
-const routes = require("./routes");
+const { router } = require("./routes");
 
 
-app.use("/items", routes);
+app.use("/items", router);
 
 
 module.exports = {
