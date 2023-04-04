@@ -14,14 +14,18 @@ router.get("/", (req, res, next) => {
 })
 
 /** POST /items: add new item (JSON data input) to shopping list. */
-// router.post("/", (req, res, next) => {
-    // return res.json({
-    //     added: {
-    //         name: "newitem",
-    //         price: 1.99
-    //     }
-    // });
-// })
+router.post("/", (req, res, next) => {
+    const item = {
+        name: req.body.name,
+        price: req.body.price
+    };
+
+    items.push(item);
+
+    return res.json({
+        added: item
+    });
+})
 
 /** GET /items/:name: display the info for a single item on the shopping list. */
 router.get("/:name", (req, res, next) => {
@@ -36,6 +40,10 @@ router.get("/:name", (req, res, next) => {
 /** PATCH /items/:name: modify the info (JSON data input) for a single item on the shopping
  * list.
  */
+router.patch("/:name", (req, res, next) => {
+
+
+})
 
 
 /** DELETE /items/:name: delete a specific item from the shopping list. */
