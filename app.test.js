@@ -59,7 +59,8 @@ describe("Tests for POST /items", () => {
 
 describe("Tests for GET /items/:name", () => {
 
-    test("GET /items/:name should result in a 404 status code for a nonexistent item name",
+    test("GET /items/:name should result in a 404 status code and correct response body for a " +
+    "nonexistent given item",
     async () => {
         const resp = await request(app).get("/items/nonexistent");
 
@@ -86,9 +87,42 @@ describe("Tests for GET /items/:name", () => {
 
 describe("Tests for PATCH /items/:name", () => {
 
+    test("PATCH /items/:name should return a 404 status code and correct response body for a " +
+    "nonexistent given item", async () => {
+
+    })
+
+    test("PATCH /items/:name should return the correct status code and response body for an " +
+    "existing given item",
+    async () => {
+
+    })
+
+    test("PATCH /items/:name should correctly update an existing item in the shopping list",
+    async () => {
+
+    })
+
 })
 
 describe("Tests for DELETE /items/:name", () => {
+
+    test("DELETE /items/:name should return a 404 status code and correct response body for a " +
+    "nonexistent given item", async () => {
+
+    })
+
+    test("DELETE /items/:name should return the correct status code and response body for an " +
+    "existing given item",
+    async () => {
+
+    })
+
+    test("DELETE /items/:name should successfully delete an existing item from the shopping " +
+    "list",
+    async () => {
+
+    })
 
 })
 
