@@ -37,6 +37,9 @@ router.get("/:name", (req, res, next) => {
             return res.json(item);
         }
     }
+
+    // Continue to 404 handler if desired item not found
+    return next();
 })
 
 /** PATCH /items/:name: modify the info (JSON data input) for a single item on the shopping
