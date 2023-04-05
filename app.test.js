@@ -17,7 +17,7 @@ let reeses = {
 };
 
 let fruitLoops = {
-    name: "Fruit Loops",
+    name: "FruitLoops",
     price: 4.98
 };
 
@@ -28,19 +28,46 @@ beforeEach(() => {
 
 afterEach(() => {
     items.length = 0;
-})
+});
 
 describe("Tests for GET /items", () => {
 
     test("GET /items should return a list of items: [{name: <name>, price: <price>}, ...]",
-        async () => {
-            const resp = await request(app).get("/items");
+    async () => {
+        const resp = await request(app).get("/items");
 
-            expect(resp.statusCode).toEqual(200);
-            expect(resp.body).toEqual([
-                {name: "Reese's", price: 2.99},
-                {name: "Fruit Loops", price: 4.98}
-            ]);
+        expect(resp.statusCode).toEqual(200);
+        expect(resp.body).toEqual([
+            {name: "Reese's", price: 2.99},
+            {name: "FruitLoops", price: 4.98}
+        ]);
+    });
+});
+
+describe("Tests for GET /items/:name", () => {
+
+    test("GET /items/:name should result in a 404 status code for a nonexistent item name",
+    async () => {
+        const resp = await request(app).get("/items/nonexistent");
+
+        expect(resp.statusCode).toEqual(404);
+        expect(resp.body).toEqual({
+            error: {
+                message: "Page not found!",
+                status: 404
+            }
         })
-})
+    })
+
+    test("GET /items/:name should return all the info for the item with the given name",
+    async () => {
+        const resp = await request(app).get("/items/FruitLoops");
+
+        expect(resp.statusCode).toEqual(200);
+        expect(resp.body).toEqual({
+            name: "FruitLoops",
+            price: 4.98
+        });
+    });
+});
 
