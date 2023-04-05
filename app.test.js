@@ -44,6 +44,19 @@ describe("Tests for GET /items", () => {
     });
 });
 
+describe("Tests for POST /items", () => {
+
+    test("POST /items should return the appropriate status code and response body: " +
+    "{added: {name: <name>, price: ...}}",
+    async () => {
+
+    })
+
+    test("POST /items should successfully add a new item to the shopping list", async () => {
+
+    })
+})
+
 describe("Tests for GET /items/:name", () => {
 
     test("GET /items/:name should result in a 404 status code for a nonexistent item name",
@@ -70,4 +83,12 @@ describe("Tests for GET /items/:name", () => {
         });
     });
 });
+
+describe("Tests for PATCH /items/:name", () => {
+
+})
+
+describe("Tests for DELETE /items/:name", () => {
+
+})
 
