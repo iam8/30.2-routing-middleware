@@ -68,10 +68,11 @@ router.patch("/:name", (req, res, next) => {
 
 /** DELETE /items/:name: delete a specific item from the shopping list. */
 router.delete("/:name", (req, res, next) => {
-    const idx = items.findIndex((item) => {item.name === req.params.name});
+    const idx = items.findIndex((item) => {return item.name === req.params.name});
+    console.log(idx);
 
     if (idx < 0) {
-        return res.json({ message: "No item with the given name exists in list."});
+        return next();
     }
 
     items.splice(idx, 1);
