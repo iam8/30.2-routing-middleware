@@ -131,7 +131,7 @@ describe("Tests for PATCH /items/:name", () => {
     })
 
     test("PATCH /items/:name should not change the original shopping list if a nonexistent item" +
-    "is given",
+    " is given",
     async () => {
         const origList = structuredClone(items);  // Make deep copy of items list
 
@@ -196,7 +196,7 @@ describe("Tests for DELETE /items/:name", () => {
     })
 
     test("DELETE /items/:name should not change the original shopping list if a nonexistent item" +
-    "is given",
+    " is given",
     async () => {
         const origList = structuredClone(items);  // Make deep copy of items list
         await request(app).delete("/items/nonexistent")
