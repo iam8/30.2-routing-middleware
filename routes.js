@@ -6,7 +6,7 @@
 
 const express = require("express");
 const router = new express.Router();
-const { ExpressError } = require("./expressError");
+// const { ExpressError } = require("./expressError");
 
 const { items } = require("./fakeDb");
 
@@ -24,7 +24,7 @@ router.post("/", (req, res, next) => {
 
     items.push(item);
 
-    return res.json({
+    return res.status(201).json({
         added: item
     });
 })
@@ -57,10 +57,12 @@ router.patch("/:name", (req, res, next) => {
             }
 
             updated = item;
+            return res.json({ updated });
         }
     }
 
-    return res.json({ updated });
+    // Continue to 404 handler if desired item not found
+    return next();
 })
 
 
