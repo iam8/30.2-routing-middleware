@@ -180,24 +180,49 @@ describe("Tests for PATCH /items/:name", () => {
 
 })
 
-// describe("Tests for DELETE /items/:name", () => {
+describe("Tests for DELETE /items/:name", () => {
 
-//     test("DELETE /items/:name should return a 404 status code and correct response body for a " +
-//     "nonexistent given item", async () => {
+    test("DELETE /items/:name should return a 404 status code and correct response body for a " +
+    "nonexistent given item", async () => {
+        const resp = await request(app).delete("/items/nonexistent");
 
-//     })
+        expect(resp.statusCode).toEqual(404);
+        expect(resp.body).toEqual({
+            error: {
+                message: "Page not found!",
+                status: 404
+            }
+        })
+    })
 
-//     test("DELETE /items/:name should return the correct status code and response body for an " +
-//     "existing given item",
-//     async () => {
+    test("DELETE /items/:name should not change the original shopping list if a nonexistent item" +
+    "is given",
+    async () => {
+        const origList = structuredClone(items);  // Make deep copy of items list
+        await request(app).delete("/items/nonexistent")
 
-//     })
+        expect(items).toEqual(origList);
+    })
 
-//     test("DELETE /items/:name should successfully delete an existing item from the shopping " +
-//     "list",
-//     async () => {
+    test("DELETE /items/:name should return the correct status code and response body for an " +
+    "existing given item",
+    async () => {
+        const resp = await request(app).delete("/items/FruitLoops");
 
-//     })
+        expect(resp.statusCode).toEqual(200);
+        expect(resp.body).toEqual({message: "Deleted"});
+    })
 
-// })
+    test("DELETE /items/:name should successfully delete an existing item from the shopping " +
+    "list",
+    async () => {
+        await request(app).delete("/items/FruitLoops");
+
+        expect(items.length).toEqual(1);
+        expect(items).not.toContainEqual({
+            name: "FruitLoops",
+            price: 4.98
+        })
+    })
+})
 
